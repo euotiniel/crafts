@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Clock10, RadioTower, Podcast } from "lucide-react";
 import { FaStar, FaUnlockKeyhole } from "react-icons/fa6";
@@ -7,16 +9,28 @@ import { TbPlayerTrackNextFilled, TbFaceId } from "react-icons/tb";
 import { AudioLinesIcon } from "@/components/audio-lines";
 
 export default function DynamicIsland() {
+
+  const [state1, setState1] = React.useState(true);
+  const [state2, setState2] = React.useState(true);
+
+  const setState = (state: string) => {
+    if (state === "state1") {
+      setState1((prev) => !prev);
+    } else if (state === "state2") {
+      setState2((prev) => !prev);
+    }
+  };
+
   return (
     <div className="h-screen w-full flex justify-center items-center bg-white">
-      <div className="flex items-start gap-5">
+      <div className="flex flex-col items-center gap-5">
+         <div>
+          <div className="bg-black h-[30px] w-[100px] rounded-full"> </div>
+        </div>
+
         <div className="bg-black h-[35px] w-[170px] rounded-full flex items-center justify-between py-2 px-3">
           <FaUnlockKeyhole className="text-white" size={16} />
           <TbFaceId className="text-green-500 rounded-2xl" size={23} />
-        </div>
-
-        <div>
-          <div className="bg-black h-[35px] w-[100px] rounded-full"> </div>
         </div>
 
         <div className="bg-black w-[300px] rounded-[40px] flex flex-col px-5 pt-6 pb-3.5 gap-4">
@@ -83,8 +97,16 @@ export default function DynamicIsland() {
             </div>
             <Podcast className="text-neutral-400" size={20} />
           </div>
+
+        
+        </div>
+        <div>
+          <button onClick={() => setState("state1")} className="bg-black text-white px-4 py-2 rounded-full">
+            Close
+          </button>
         </div>
       </div>
+       
     </div>
   );
 }
